@@ -1,0 +1,380 @@
+
+/* ========================== 
+
+   Funny Caption Tees Styles 
+
+   ========================== */ 
+
+/* Color Variables */ 
+
+:root { 
+
+    --coffee-bean: #644536; 
+
+    --terracotta: #B2675E; 
+
+    --camel: #C4A381; 
+
+    --willow-green: #BBD686; 
+
+    --cream: #EEF1BD; 
+
+    --white: #ffffff; 
+
+} 
+
+/* Reset */ 
+
+* { 
+
+    margin: 0; 
+
+    padding: 0; 
+
+    box-sizing: border-box; 
+
+} 
+
+/* Body */ 
+
+body { 
+
+    font-family: Arial, Helvetica, sans-serif; 
+
+    background-color: var(--cream); 
+
+    color: var(--coffee-bean); 
+
+    line-height: 1.6; 
+
+} 
+
+/* Header */ 
+
+header { 
+
+    background-color: var(--coffee-bean); 
+
+    color: var(--cream); 
+
+    padding: 1rem; 
+
+} 
+
+header h1 { 
+
+    text-align: center; 
+
+    margin-bottom: 0.5rem; 
+
+} 
+
+/* Navigation */ 
+
+nav ul { 
+
+    display: flex; 
+
+    justify-content: center; 
+
+    list-style: none; 
+
+    gap: 1rem; 
+
+} 
+
+nav a { 
+
+    color: var(--cream); 
+
+    text-decoration: none; 
+
+    font-weight: bold; 
+
+} 
+
+nav a:hover { 
+
+    color: var(--willow-green); 
+
+} 
+
+/* Main Content */ 
+
+main { 
+
+    max-width: 1200px; 
+
+    margin: 0 auto; 
+
+    padding: 2rem; 
+
+} 
+
+/* Sections */ 
+
+section { 
+
+    background-color: white; 
+
+    margin-bottom: 1.5rem; 
+
+    padding: 1.5rem; 
+
+    border-radius: 10px; 
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+
+} 
+
+/* Product Cards */ 
+
+article { 
+
+    background-color: var(--cream); 
+
+    border: 2px solid var(--camel); 
+
+    border-radius: 8px; 
+
+    padding: 1rem; 
+
+    margin-top: 1rem; 
+
+} 
+
+article h3 { 
+
+    color: var(--terracotta); 
+
+} 
+
+/* Buttons */ 
+
+button { 
+
+    background-color: var(--terracotta); 
+
+    color: white; 
+
+    border: none; 
+
+    padding: 0.75rem 1.25rem; 
+
+    border-radius: 5px; 
+
+    cursor: pointer; 
+
+    margin-top: 0.5rem; 
+
+} 
+
+button:hover { 
+
+    background-color: var(--coffee-bean); 
+
+} 
+
+button:disabled { 
+
+    background-color: gray; 
+
+    cursor: not-allowed; 
+
+} 
+
+/* Forms */ 
+
+form { 
+
+    display: flex; 
+
+    flex-direction: column; 
+
+    gap: 1rem; 
+
+} 
+
+input, 
+
+select { 
+
+    padding: 0.75rem; 
+
+    border: 1px solid var(--camel); 
+
+    border-radius: 5px; 
+
+} 
+
+/* Shop Grid */ 
+
+.product-container{
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+}
+
+.product-image {
+    flex: 1;
+}
+
+.product-image img{
+    width: 100%;
+    border-radius:8px;
+}
+
+.product-details{
+    flex:1;
+    max-width: 500px;
+}
+
+.product-details h2{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.price{
+    font-size: 1.5rem;
+    color:#B2675E;
+    margin-bottom: 20px;
+}
+
+.size-options{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.size-options button{
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: #B2675E;
+}
+
+.add-cart{
+    width: 100%;
+    padding: 16px;
+    background-color: #644536;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px){
+
+    .product-container{
+        flex-direction: column;
+    }
+    .product-details{
+        max-width: 100%;
+    }
+}
+
+/* Cart Summary */ 
+.cart-summary { 
+
+    background-color: var(--willow-green); 
+
+    padding: 1rem; 
+
+    border-radius: 8px; 
+
+} 
+
+/* Footer */ 
+
+footer { 
+
+    background-color: var(--coffee-bean); 
+
+    color: var(--cream); 
+
+    text-align: center; 
+
+    padding: 1rem; 
+
+    margin-top: 2rem; 
+
+} 
+
+/* Links */ 
+
+a { 
+
+    color: var(--terracotta); 
+
+} 
+
+a:hover { 
+
+    color: var(--coffee-bean); 
+
+} 
+
+/* Images */ 
+
+img { 
+
+    max-width: 100%; 
+
+    height: auto; 
+
+    display: block; 
+
+} 
+
+/* ========================== 
+
+   Responsive Design 
+
+   ========================== */ 
+
+/* Tablets */ 
+
+@media (max-width: 768px) { 
+
+    nav ul { 
+
+        flex-direction: column; 
+
+        align-items: center; 
+
+    } 
+
+    main { 
+
+        padding: 1rem; 
+
+    } 
+
+} 
+
+/* Phones */ 
+
+@media (max-width: 480px) { 
+
+    header h1 { 
+
+        font-size: 1.5rem; 
+
+    } 
+
+    section { 
+
+        padding: 1rem; 
+
+    } 
+
+    button { 
+
+        width: 100%; 
+
+    } 
+
+} 
+
+ 
