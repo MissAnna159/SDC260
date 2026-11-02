@@ -1,14 +1,23 @@
-# SDC260
-Projects
-Fresh Caption is a print-on-demand online store for original viral-meme T-shirts. Shoppers browse trending designs, pick a size and color, and check out as guests. Each shirt is printed only after it is ordered, then retired when the joke goes stale.
-Plan:
-Week 1 — Foundation.
-	Create layout, pick color scheme, build the header, footer, and homepage.
-Week 2 — Catalog.
-	Complete catalog, render the shop grid, build the product details page, add color and size selectors.
-Week 3 — Cart.
-	Wire add to cart from the product page, build the cart page.
-Week 4 — Checkout.
-	Build check out form, email, address, card field. Submit it to the order confirmation page. 
-Week 5 — Polish. 
-	Recheck contract
+
+## Technologies
+
+- HTML5
+- CSS3 (responsive grid, custom properties)
+- Vanilla JavaScript (no frameworks)
+- `localStorage` for cart persistence and network test data
+
+## How to Run
+
+1. Clone the repository
+2. Open `index.html` in a web browser
+3. Navigate through the site using the header links
+
+No build step or server is required — the site runs entirely in the browser.
+
+## Development Roadmap
+
+- **Week 1 — Foundation.** Layout, color scheme, header, footer, and homepage.
+- **Week 2 — Catalog.** Shop grid, product details, color and size selectors.
+- **Week 3 — Cart.** Add to cart, cart page, inventory awareness.
+- **Week 4 — Checkout.** Shipping and payment forms, order confirmation.
+- **Week 5 — Polish.** Network test page, final review, and README.
