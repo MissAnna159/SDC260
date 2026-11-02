@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Connection Test - Fresh Caption</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+<header>
+    <h1>Network Connection Test</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ProductPage.html">Products</a></li>
+            <li><a href="ShopPage.html">Shop</a></li>
+            <li><a href="CartPage.html">Cart</a></li>
+            <li><a href="ContactPage.html">Contact</a></li>
+            <li><a href="NetworkTest.html">Network Test</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Connection Details</h2>
+        <p>This page displays current network connection information for the Fresh Caption store.</p>
+        <div id="network-info" style="margin-top:1.5rem;">
+            <p><strong>Local Host Name:</strong> <span id="host-name">Loading...</span></p>
+            <p><strong>Current Communication Port:</strong> <span id="port">Loading...</span></p>
+            <p><strong>Current Transmission Protocol:</strong> <span id="protocol">Loading...</span></p>
+            <p><strong>Last Time Launched:</strong> <span id="last-launched">Loading...</span></p>
+        </div>
+        <button onclick="refreshNetworkInfo()" style="margin-top:1rem;">Refresh</button>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2026 Fresh Caption</p>
+</footer>
+
+<script>
+    function getNetworkInfo() {
+        const hostname = window.location.hostname || "localhost";
+        const port = window.location.port || (window.location.protocol === "https:" ? "443" : "80");
+        const protocol = window.location.protocol.replace(":", "").toUpperCase();
+
+        // Last time launched — store in localStorage
+        const now = new Date();
+        const lastLaunched = localStorage.getItem("lastLaunched");
+        localStorage.setItem("lastLaunched", now.toISOString());
+
+        const lastDisplay = lastLaunched
+            ? new Date(lastLaunched).toLocaleString()
+            : "First launch";
+
+        document.getElementById("host-name").textContent = hostname;
+        document.getElementById("port").textContent = port;
+        document.getElementById("protocol").textContent = protocol;
+        document.getElementById("last-launched").textContent = lastDisplay;
+    }
+
+    function refreshNetworkInfo() {
+        getNetworkInfo();
+    }
+
+    document.addEventListener("DOMContentLoaded", getNetworkInfo);
+</script>
+</body>
+</html>
