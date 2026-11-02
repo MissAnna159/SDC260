@@ -9,7 +9,7 @@ const products = [
     { id: 6, name: "Monday Mood", price: 9.99, category: "Work", image: "monday-mood.jpg", description: "Send help. It's Monday.", stock: 15 },
     { id: 7, name: "Coffee First", price: 9.99, category: "Food", image: "coffee-first.jpg", description: "Do not talk to me before coffee.", stock: 8 },
     { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "GenZ.avif", description: "GenZ Stare.", stock: 4 },
-    { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart.", stock: 15},
+    { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart.", stock: 15 },
     { id: 10, name: "67", price: 10.99, category: "Internet", image: "67.jpg", description: "67.", stock: 17 },
     { id: 11, name: "Error 404", price: 10.99, category: "Internet", image: "Error404.jpg", description: "Motivation not found.", stock: 10 },
     { id: 12, name: "Sleep is Optional", price: 10.99, category: "Work", image: "sleep.png", description: "Sleep is Optional.", stock: 10 }
@@ -30,7 +30,6 @@ function saveCart() {
     localStorage.setItem("freshCaptionCart", JSON.stringify(cart));
 }
 
-//track stock 
 function addToCart(productId, quantity = 1) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -53,17 +52,15 @@ function addToCart(productId, quantity = 1) {
     saveCart();
     alert(`${product.name} added to cart!`);
 
-    // Re-render product list if you're on a page that shows it
     if (typeof renderProducts === "function") renderProducts();
     if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
-//restore stocks
 function removeFromCart(productId) {
     const item = cart.find(i => i.id === productId);
     if (item) {
         const product = products.find(p => p.id === productId);
-        if (product) product.stock += item.quantity;  
+        if (product) product.stock += item.quantity;
     }
 
     cart = cart.filter(i => i.id !== productId);
@@ -74,13 +71,29 @@ function removeFromCart(productId) {
     if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
-function getCartTotal() {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+function updateQuantity(productId, newQty) {
+    const item = cart.find(item => item.id === productId);
+    if (!item) return;
+
+    const product = products.find(p => p.id === productId);
+    const qty = Math.max(1, parseInt(newQty) || 1);
+    const difference = qty - item.quantity;
+
+    if (product && difference > 0 && product.stock < difference) {
+        alert("Not enough stock for that quantity.");
+        return;
+    }
+
+    if (product) product.stock -= difference;
+    item.quantity = qty;
+    saveCart();
+    renderCart();
+
+    if (typeof renderProducts === "function") renderProducts();
+    if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
-//clear cart
 function clearCart() {
-    // Restore stock for every item in the cart
     cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
         if (product) product.stock += item.quantity;
@@ -94,14 +107,23 @@ function clearCart() {
     if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
+function getCartTotal() {
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
 // Product display using JavaScript loop
 function renderProducts(containerId = "product-grid") {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = "";
-    // JavaScript looping mechanism
+
     for (let i = 0; i < products.length; i++) {
         const p = products[i];
+        const outOfStock = p.stock <= 0;
+        const buttonHtml = outOfStock
+            ? `<button class="out-of-stock" disabled title="Out of Stock">Out of Stock</button>`
+            : `<button onclick="addToCart(${p.id})" title="Add to cart">Add to Cart</button>`;
+
         const card = document.createElement("article");
         card.className = "product-card";
         card.innerHTML = `
@@ -110,7 +132,8 @@ function renderProducts(containerId = "product-grid") {
             <h3>${p.name}</h3>
             <p class="price">$${p.price.toFixed(2)}</p>
             <p>${p.description}</p>
-            <button onclick="addToCart(${p.id})">Add to Cart</button>
+            <p>In stock: ${p.stock}</p>
+            ${buttonHtml}
         `;
         container.appendChild(card);
     }
@@ -122,11 +145,13 @@ function renderCart() {
     const summary = document.getElementById("cart-summary");
     if (!container) return;
     container.innerHTML = "";
+
     if (cart.length === 0) {
         container.innerHTML = "<p>Your cart is empty. <a href='ShopPage.html'>Shop now</a></p>";
         if (summary) summary.innerHTML = "";
         return;
     }
+
     for (let i = 0; i < cart.length; i++) {
         const item = cart[i];
         const div = document.createElement("div");
@@ -144,17 +169,20 @@ function renderCart() {
         `;
         container.appendChild(div);
     }
+
     const subtotal = getCartTotal();
     const shipping = subtotal >= 50 ? 0 : 5.00;
     const total = subtotal + shipping;
+
     if (summary) {
         summary.innerHTML = `
             <p>Subtotal: $${subtotal.toFixed(2)}</p>
             <p>Shipping: $${shipping.toFixed(2)} ${subtotal >= 50 ? "(Free over $50!)" : ""}</p>
             <p><strong>Total: $${total.toFixed(2)}</strong></p>
-            // Inside renderCart(), in the summary.innerHTML section, add:
             <a href="CheckoutPage.html"><button>Proceed to Checkout</button></a>
-            <button onclick="clearCart()" style="margin-left:0.5rem; background:#c0392b;">Clear Cart</button>
+            <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+        `;
+    }
 }
 
 // ========== VALIDATION FUNCTIONS ==========
@@ -348,7 +376,6 @@ function placeOrder(event) {
     const shipValid = validateShippingForm();
     const purchaseValid = validatePurchaseForm();
     if (shipValid && purchaseValid) {
-        // Clear cart after "order"
         localStorage.removeItem("freshCaptionCart");
         cart = [];
         window.location.href = "OrderConfirmation.html";
