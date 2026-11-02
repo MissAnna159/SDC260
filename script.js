@@ -8,7 +8,7 @@ const products = [
     { id: 5, name: "Kidding Me", price: 9.99, category: "Internet", image: "kidding-me.webp", description: "Are you kidding me right now?" },
     { id: 6, name: "Monday Mood", price: 9.99, category: "Work", image: "monday-mood.jpg", description: "Send help. It's Monday." },
     { id: 7, name: "Coffee First", price: 9.99, category: "Food", image: "coffee-first.jpg", description: "Do not talk to me before coffee." },
-    { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "Genz.avif", description: "GenZ Stare." },
+    { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "GenZ.avif", description: "GenZ Stare." },
     { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart." },
     { id: 10, name: "67", price: 10.99, category: "Internet", image: "67.jpg", description: "67." },
     { id: 11, name: "Error 404", price: 10.99, category: "Internet", image: "Error404.jpg", description: "Motivation not found." },
