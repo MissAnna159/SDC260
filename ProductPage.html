@@ -17,15 +17,18 @@
 
 <script src="script.js"></script>
 <script>
-    // Render product detail sections using the products array
     function renderProductDetails() {
         const container = document.getElementById("product-details-container");
         if (!container) return;
         container.innerHTML = "";
 
-        // JavaScript looping mechanism over the products array
         for (let i = 0; i < products.length; i++) {
             const p = products[i];
+            const outOfStock = p.stock <= 0;
+            const buttonHtml = outOfStock
+                ? `<button class="out-of-stock" disabled title="Out of Stock">Out of Stock</button>`
+                : `<button class="add-cart" onclick="addToCart(${p.id})" title="Add to cart">Add to Cart</button>`;
+
             const main = document.createElement("main");
             main.className = "product-container";
             main.innerHTML = `
@@ -33,6 +36,7 @@
                     <img src="${p.image}" alt="${p.name}">
                     <h2>${p.name} Tee</h2>
                     <p class="price">$${p.price.toFixed(2)}</p>
+                    <p>In stock: ${p.stock}</p>
                     <h3>Color</h3>
                     <div class="color-options">
                         <button>Black</button>
@@ -47,9 +51,7 @@
                     </div>
                     <label for="quantity-${p.id}">Quantity</label>
                     <input type="number" id="quantity-${p.id}" min="1" value="1">
-                    <button class="add-cart" onclick="addToCart(${p.id})">
-                        Add to Cart
-                    </button>
+                    ${buttonHtml}
                     <section class="description">
                         <h3>Product Details</h3>
                         <p>${p.description}</p>
