@@ -378,3 +378,103 @@ img {
 } 
 
  
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.product-card {
+    background: white;
+    border: 2px solid var(--camel);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.product-card h3 {
+    color: var(--terracotta);
+    margin: 0.5rem 0;
+}
+
+.product-card .category {
+    font-size: 0.85rem;
+    color: var(--coffee-bean);
+    font-style: italic;
+}
+
+.product-card .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--terracotta);
+    margin: 0.5rem 0;
+}
+
+/* Form Errors */
+.error {
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+}
+
+input.invalid, select.invalid {
+    border-color: #c0392b;
+    background-color: #fff5f5;
+}
+
+.success {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* Cart table */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--camel);
+}
+
+.discount-applied {
+    background-color: var(--willow-green);
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+}
+
+textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--camel);
+    border-radius: 5px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+/* Make product grid responsive already handled by auto-fit */
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
