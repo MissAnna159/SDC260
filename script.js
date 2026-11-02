@@ -1,18 +1,18 @@
 // Fresh Caption - Meme T-Shirt Store
 // Products data (at least 10)
 const products = [
-    { id: 1, name: "Snack Police", price: 24.99, category: "Food", image: "snack-police.avif", description: "Enforcing snack laws one bite at a time." },
-    { id: 2, name: "Normal Once", price: 22.99, category: "Internet", image: "normal-once.jpg", description: "I was normal once. It was awful." },
-    { id: 3, name: "Act Silly", price: 21.99, category: "Pets", image: "act-silly.avif", description: "Professional silly actor since forever." },
-    { id: 4, name: "Own Joke", price: 23.99, category: "Work", image: "own-joke.webp", description: "I own this joke now. You're welcome." },
-    { id: 5, name: "Kidding Me", price: 19.99, category: "Internet", image: "kidding-me.webp", description: "Are you kidding me right now?" },
-    { id: 6, name: "Monday Mood", price: 24.99, category: "Work", image: "normal-once.jpg", description: "Send help. It's Monday." },
-    { id: 7, name: "Coffee First", price: 22.99, category: "Food", image: "snack-police.avif", description: "Do not talk to me before coffee." },
-    { id: 8, name: "Doggo Approved", price: 21.99, category: "Pets", image: "act-silly.avif", description: "10/10 would recommend to other dogs." },
-    { id: 9, name: "Ctrl Alt Delete", price: 23.99, category: "Internet", image: "own-joke.webp", description: "When life gives you errors, restart." },
-    { id: 10, name: "Brunch Club", price: 20.99, category: "Food", image: "kidding-me.webp", description: "Official member of the brunch elite." },
-    { id: 11, name: "Error 404", price: 25.99, category: "Internet", image: "normal-once.jpg", description: "Motivation not found." },
-    { id: 12, name: "Sleep is Optional", price: 22.99, category: "Work", image: "snack-police.avif", description: "According to my boss, anyway." }
+    { id: 1, name: "Snack Police", price: 9.99, category: "Food", image: "snack-police.avif", description: "Enforcing snack laws one bite at a time." },
+    { id: 2, name: "Normal Once", price: 9.99, category: "Internet", image: "normal-once.jpg", description: "I was normal once. It was awful." },
+    { id: 3, name: "Act Silly", price: 9.99, category: "Pets", image: "act-silly.avif", description: "Professional silly actor since forever." },
+    { id: 4, name: "Own Joke", price: 9.99, category: "Work", image: "own-joke.webp", description: "I own this joke now. You're welcome." },
+    { id: 5, name: "Kidding Me", price: 9.99, category: "Internet", image: "kidding-me.webp", description: "Are you kidding me right now?" },
+    { id: 6, name: "Monday Mood", price: 9.99, category: "Work", image: "monday-mood.jpg", description: "Send help. It's Monday." },
+    { id: 7, name: "Coffee First", price: 9.99, category: "Food", image: "coffee-first.jpg", description: "Do not talk to me before coffee." },
+    { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "Genz.avif", description: "GenZ Stare." },
+    { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart." },
+    { id: 10, name: "67", price: 10.99, category: "Internet", image: "67.jpg", description: "67." },
+    { id: 11, name: "Error 404", price: 10.99, category: "Internet", image: "Error404.jpg", description: "Motivation not found." },
+    { id: 12, name: "Sleep is Optional", price: 10.99, category: "Work", image: "sleep.png", description: "Sleep is Optional." }
 ];
 
 // Valid coupon codes
