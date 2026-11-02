@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Fresh Caption</title>
+    <link rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+<header>
+    <h1>Checkout</h1>
+    <nav>
+        <ul>
+            <li><a href="HomePage.html">Home</a></li>
+            <li><a href="ShopPage.html">Shop</a></li>
+            <li><a href="CartPage.html">Cart</a></li>
+            <li><a href="ContactPage.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <form id="checkout-form" onsubmit="placeOrder(event)">
+        <section>
+            <h2>Shipping Information</h2>
+            <label for="ship-name">Full Name <span style="color:red">*</span></label>
+            <input type="text" id="ship-name" name="name" required>
+
+            <label for="ship-street">Street Address <span style="color:red">*</span></label>
+            <input type="text" id="ship-street" name="street" required>
+
+            <label for="ship-city">City <span style="color:red">*</span></label>
+            <input type="text" id="ship-city" name="city" required>
+
+            <label for="ship-state">State <span style="color:red">*</span></label>
+            <input type="text" id="ship-state" name="state" required placeholder="e.g. VA">
+
+            <label for="ship-zip">ZIP Code <span style="color:red">*</span></label>
+            <input type="text" id="ship-zip" name="zip" required placeholder="12345">
+
+            <label for="ship-phone">Phone Number <span style="color:red">*</span></label>
+            <input type="tel" id="ship-phone" name="phone" required placeholder="555-123-4567">
+        </section>
+
+        <section>
+            <h2>Payment Information</h2>
+            <label for="card-name">Cardholder Name <span style="color:red">*</span></label>
+            <input type="text" id="card-name" name="cardname" required>
+
+            <label for="card-number">Credit Card Number <span style="color:red">*</span></label>
+            <input type="text" id="card-number" name="cardnumber" required placeholder="1234 5678 9012 3456">
+
+            <label for="card-exp">Expiration Date <span style="color:red">*</span></label>
+            <input type="text" id="card-exp" name="exp" required placeholder="MM/YY">
+
+            <label for="card-cvv">Security Code <span style="color:red">*</span></label>
+            <input type="text" id="card-cvv" name="cvv" required placeholder="123">
+
+            <label for="coupon-code">Coupon Code</label>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+                <input type="text" id="coupon-code" name="coupon" placeholder="Enter code (e.g. MEME10)">
+                <button type="button" onclick="applyDiscount()">Apply</button>
+            </div>
+            <div id="discount-result"></div>
+        </section>
+
+        <section>
+            <h2>Order Summary</h2>
+            <div id="order-summary">
+                <!-- Updated by JavaScript -->
+            </div>
+            <button type="submit">Place Order</button>
+        </section>
+    </form>
+</main>
+<footer>
+    <p>Guest Checkout | Secure Payment | Fresh Caption</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
