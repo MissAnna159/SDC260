@@ -1,18 +1,18 @@
 // Fresh Caption - Meme T-Shirt Store
 // Products data (at least 10)
 const products = [
-    { id: 1, name: "Snack Police", price: 9.99, category: "Food", image: "snack-police.avif", description: "Enforcing snack laws one bite at a time." },
-    { id: 2, name: "Normal Once", price: 9.99, category: "Internet", image: "normal-once.jpg", description: "I was normal once. It was awful." },
-    { id: 3, name: "Act Silly", price: 9.99, category: "Pets", image: "act-silly.avif", description: "Professional silly actor since forever." },
-    { id: 4, name: "Own Joke", price: 9.99, category: "Work", image: "own-joke.webp", description: "I own this joke now. You're welcome." },
-    { id: 5, name: "Kidding Me", price: 9.99, category: "Internet", image: "kidding-me.webp", description: "Are you kidding me right now?" },
-    { id: 6, name: "Monday Mood", price: 9.99, category: "Work", image: "monday-mood.jpg", description: "Send help. It's Monday." },
-    { id: 7, name: "Coffee First", price: 9.99, category: "Food", image: "coffee-first.jpg", description: "Do not talk to me before coffee." },
-    { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "GenZ.avif", description: "GenZ Stare." },
-    { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart." },
-    { id: 10, name: "67", price: 10.99, category: "Internet", image: "67.jpg", description: "67." },
-    { id: 11, name: "Error 404", price: 10.99, category: "Internet", image: "Error404.jpg", description: "Motivation not found." },
-    { id: 12, name: "Sleep is Optional", price: 10.99, category: "Work", image: "sleep.png", description: "Sleep is Optional." }
+    { id: 1, name: "Snack Police", price: 9.99, category: "Food", image: "snack-police.avif", description: "Enforcing snack laws one bite at a time.", stock: 10 },
+    { id: 2, name: "Normal Once", price: 9.99, category: "Internet", image: "normal-once.jpg", description: "I was normal once. It was awful.", stock: 5 },
+    { id: 3, name: "Act Silly", price: 9.99, category: "Pets", image: "act-silly.avif", description: "Professional silly actor since forever.", stock: 2 },
+    { id: 4, name: "Own Joke", price: 9.99, category: "Work", image: "own-joke.webp", description: "I own this joke now. You're welcome.", stock: 1 },
+    { id: 5, name: "Kidding Me", price: 9.99, category: "Internet", image: "kidding-me.webp", description: "Are you kidding me right now?", stock: 12 },
+    { id: 6, name: "Monday Mood", price: 9.99, category: "Work", image: "monday-mood.jpg", description: "Send help. It's Monday.", stock: 15 },
+    { id: 7, name: "Coffee First", price: 9.99, category: "Food", image: "coffee-first.jpg", description: "Do not talk to me before coffee.", stock: 8 },
+    { id: 8, name: "Gen Z Stare", price: 10.99, category: "Internet", image: "GenZ.avif", description: "GenZ Stare.", stock: 4 },
+    { id: 9, name: "Ctrl Alt Delete", price: 10.99, category: "Internet", image: "Delete.jpg", description: "When life gives you errors, restart.", stock: 15},
+    { id: 10, name: "67", price: 10.99, category: "Internet", image: "67.jpg", description: "67.", stock: 17 },
+    { id: 11, name: "Error 404", price: 10.99, category: "Internet", image: "Error404.jpg", description: "Motivation not found.", stock: 10 },
+    { id: 12, name: "Sleep is Optional", price: 10.99, category: "Work", image: "sleep.png", description: "Sleep is Optional.", stock: 10 }
 ];
 
 // Valid coupon codes
@@ -30,36 +30,68 @@ function saveCart() {
     localStorage.setItem("freshCaptionCart", JSON.stringify(cart));
 }
 
+//track stock 
 function addToCart(productId, quantity = 1) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
+
+    if (product.stock < quantity) {
+        alert("Sorry, not enough stock available.");
+        return;
+    }
+
     const existing = cart.find(item => item.id === productId);
     if (existing) {
         existing.quantity += quantity;
     } else {
         cart.push({ ...product, quantity });
     }
+
+    // Reduce stock
+    product.stock -= quantity;
+
     saveCart();
     alert(`${product.name} added to cart!`);
+
+    // Re-render product list if you're on a page that shows it
+    if (typeof renderProducts === "function") renderProducts();
+    if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
+//restore stocks
 function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        const product = products.find(p => p.id === productId);
+        if (product) product.stock += item.quantity;  
+    }
+
+    cart = cart.filter(i => i.id !== productId);
     saveCart();
     renderCart();
-}
 
-function updateQuantity(productId, newQty) {
-    const item = cart.find(item => item.id === productId);
-    if (item) {
-        item.quantity = Math.max(1, parseInt(newQty) || 1);
-        saveCart();
-        renderCart();
-    }
+    if (typeof renderProducts === "function") renderProducts();
+    if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
 function getCartTotal() {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+//clear cart
+function clearCart() {
+    // Restore stock for every item in the cart
+    cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) product.stock += item.quantity;
+    });
+
+    cart = [];
+    saveCart();
+    renderCart();
+
+    if (typeof renderProducts === "function") renderProducts();
+    if (typeof renderProductDetails === "function") renderProductDetails();
 }
 
 // Product display using JavaScript loop
@@ -120,9 +152,9 @@ function renderCart() {
             <p>Subtotal: $${subtotal.toFixed(2)}</p>
             <p>Shipping: $${shipping.toFixed(2)} ${subtotal >= 50 ? "(Free over $50!)" : ""}</p>
             <p><strong>Total: $${total.toFixed(2)}</strong></p>
+            // Inside renderCart(), in the summary.innerHTML section, add:
             <a href="CheckoutPage.html"><button>Proceed to Checkout</button></a>
-        `;
-    }
+            <button onclick="clearCart()" style="margin-left:0.5rem; background:#c0392b;">Clear Cart</button>
 }
 
 // ========== VALIDATION FUNCTIONS ==========
